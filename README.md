@@ -1,5 +1,7 @@
 # `noted`
 ![image](https://github.com/user-attachments/assets/97c52a53-94e2-4f87-a956-dc21866dd5cd)
+![image](https://github.com/user-attachments/assets/d289c17a-181a-4ef0-9d4c-d9f542f57419)
+![image](https://github.com/user-attachments/assets/0f2226d0-5e70-40ea-a76b-8bfbf3f3dd96)
 
 Welcome to your new `noted` project and to the Internet Computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
 
