@@ -146,9 +146,9 @@ function App() {
                   className="py-4 bg-blue-300/50 rounded-xl w-full m-4 px-6 p-3 flex justify-between items-center hover:cursor-pointer" style={{ backgroundColor: note.important ? 'var(--note-important-bg)' : 'var(--note-bg)' }}
                     key={Number(note.id)}
                     >
-                      <div>
-                        <strong style={{ color: 'var(--text-primary)'}} className="text-gray-800">{truncateContent(note.title, 18)}</strong>
-                        <p style={{ color: 'var(--text-primary)' }} className="text-gray-700">{truncateContent(note.content, 80)}</p>
+                      <div className="w-[70%]">
+                        <strong style={{ color: 'var(--text-primary)', wordWrap: "break-word"}} className="text-gray-800">{truncateContent(note.title, 18)}</strong>
+                        <p style={{ color: 'var(--text-primary)', wordWrap: "break-word" }} className="text-gray-700">{truncateContent(note.content, 80)}</p>
                         <small style={{ color: 'var(--text-primary)' }} className="text-gray-700">{new Date(Number(note.timestamp) / 1000000).toLocaleString()}</small>
                       </div>
                       <div className="flex flex-col gap-2">
