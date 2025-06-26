@@ -14,5 +14,11 @@
   "type": "module",
   "workspaces": [
     "src/noted_frontend"
-  ]
+  ],
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.10"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
 }
