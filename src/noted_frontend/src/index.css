@@ -5,5 +5,73 @@
 body, #root {
     font-family: 'Alike', serif;
     margin: 0;
-    background-color: rgb(236, 243, 253);
+    background-color: var(--bg-primary);
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+:root {
+  --bg-primary: rgb(236, 243, 253); /* Light background */
+  --container-bg: #dbeafe; /* Light blue-100 */
+  --note-bg: rgba(147, 197, 253, 0.5); /* Light blue-300/50 */
+  --input-bg: #f3f4f6; /* Light gray-100 */
+  --text-primary: #374151; /* Gray-700 */
+  --button-bg: rgba(96, 165, 250, 0.8); /* Blue-400/80 */
+  --button-hover: #60a5fa; /* Blue-400 */
+  --delete-bg: rgba(59, 130, 246, 0.6); /* Blue-500/60 */
+  --delete-hover: rgba(59, 130, 246, 0.7); /* Blue-500/70 */
+  --modal-bg: #dbeafe; /* Blue-100 */
+}
+
+[data-theme="dark"] {
+  --bg-primary: #1f2937; /* Dark gray-800 */
+  --container-bg: #374151; /* Dark gray-700 */
+  --note-bg: rgba(59, 130, 246, 0.3); /* Darker blue-500/30 */
+  --input-bg: #4b5563; /* Gray-600 */
+  --text-primary: #d1d5db; /* Gray-300 */
+  --button-bg: rgba(36, 81, 153, 0.8); /* Blue-500/80 */
+  --button-hover: #1e498f; /* Blue-500 */
+  --delete-bg: rgba(163, 47, 47, 0.6); /* Red-500/60 */
+  --delete-hover: rgba(173, 50, 50, 0.7); /* Red-500/70 */
+  --modal-bg: #374151; /* Gray-700 */
+}
+
+[data-theme="ocean"] {
+  --bg-primary: #a5d5f1; /* Cyan-50 */
+  --container-bg: #aeeff7; /* Cyan-100 */
+  --note-bg: rgba(6, 182, 212, 0.3); /* Cyan-500/30 */
+  --input-bg: #e5e7eb; /* Gray-200 */
+  --text-primary: #164e63; /* Cyan-900 */
+  --button-bg: rgba(6, 182, 212, 0.8); /* Cyan-500/80 */
+  --button-hover: #06b6d4; /* Cyan-500 */
+  --delete-bg: rgba(239, 68, 68, 0.6); /* Red-500/60 */
+  --delete-hover: rgba(201, 176, 176, 0.7); /* Red-500/70 */
+  --modal-bg: #a5f3fc; /* Cyan-100 */
+}
+
+[data-theme="yellow"] {
+  --bg-primary: #fff8e1; /* Light yellow background */
+  --container-bg: #f3efc4; /* Slightly lighter yellow for container */
+  --note-bg: #fef9c3; /* Soft yellow for notes, like Google Keep */
+  --input-bg: #ffffff; /* White for inputs */
+  --text-primary: #713f12; /* Dark brown for contrast */
+  --button-bg: #e2940e; /* Amber-600 for buttons */
+  --button-hover: #d97706; /* Darker amber for hover */
+  --delete-bg: #f07272; /* Red-500 for delete */
+  --delete-hover: #dc2626; /* Darker red for delete hover */
+  --modal-bg: #fefce8; /* Yellow for modal */
+}
+
+button:hover {
+  background-color: var(--button-hover) !important;
+}
+button[style*="var(--delete-bg)"]:hover {
+  background-color: var(--delete-hover) !important;
 }
