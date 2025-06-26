@@ -28,6 +28,7 @@ body, #root {
   --delete-bg: rgba(59, 130, 246, 0.6); /* Blue-500/60 */
   --delete-hover: rgba(59, 130, 246, 0.7); /* Blue-500/70 */
   --modal-bg: #dbeafe; /* Blue-100 */
+  --note-important-bg: #93c5fd;
 }
 
 [data-theme="dark"] {
@@ -41,6 +42,7 @@ body, #root {
   --delete-bg: rgba(163, 47, 47, 0.6); /* Red-500/60 */
   --delete-hover: rgba(173, 50, 50, 0.7); /* Red-500/70 */
   --modal-bg: #374151; /* Gray-700 */
+  --note-important-bg: #1e40af;
 }
 
 [data-theme="ocean"] {
@@ -54,6 +56,7 @@ body, #root {
   --delete-bg: rgba(239, 68, 68, 0.6); /* Red-500/60 */
   --delete-hover: rgba(201, 176, 176, 0.7); /* Red-500/70 */
   --modal-bg: #a5f3fc; /* Cyan-100 */
+  --note-important-bg: #06b6d4;
 }
 
 [data-theme="yellow"] {
@@ -67,6 +70,7 @@ body, #root {
   --delete-bg: #f07272; /* Red-500 for delete */
   --delete-hover: #dc2626; /* Darker red for delete hover */
   --modal-bg: #fefce8; /* Yellow for modal */
+  --note-important-bg: #facc15;
 }
 
 button:hover {

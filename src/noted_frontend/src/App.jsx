@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const fetchNotes = async () => {
       const notes = await noted_backend.getNotes();
-      setNotes(notes);
+      setNotes(notes.sort((a, b) => (b.important ? 1 : 0) - (a.important ? 1 : 0)));
     }
     fetchNotes();
     document.body.setAttribute('data-theme', theme);
@@ -45,7 +45,7 @@ function App() {
   const deleteNote = async (id) => {
     await noted_backend.deleteNote(BigInt(id));
     const notes = await noted_backend.getNotes();
-    setNotes(notes);
+    setNotes(notes.sort((a, b) => (b.important ? 1 : 0) - (a.important ? 1 : 0)));
   }
 
   const addNote = async (title, content) => {
@@ -54,12 +54,18 @@ function App() {
     setTitle('');
     setContent('');
     const notes = await noted_backend.getNotes();
-    setNotes(notes);
+    setNotes(notes.sort((a, b) => (b.important ? 1 : 0) - (a.important ? 1 : 0)));
+  }
+
+  const toggleImportant = async (id) => {
+    await noted_backend.toggleImportant(BigInt(id));
+    const notes = await noted_backend.getNotes();
+    setNotes(notes.sort((a, b) => (b.important ? 1 : 0) - (a.important ? 1 : 0)));
   }
 
   const updateNote = async (id, title, content) => {
     if (!title.trim() || !content.trim()) return;
-    await noted_backend.updateNote(BigInt(id), title, content);
+    await noted_backend.updateNote(BigInt(id), title, content, selectedNote.important);
     setSelectedNote(null);
     setEditTitle('');
     setEditContent('');
@@ -126,12 +132,12 @@ function App() {
             </div>
         </div>
         <div className={ notes.length === 0 ? 'w-[35%] -mt-6 mr-12' : "w-[35%] -mt-6 mr-8"}>
-            <div className="-mt-12 max-h-[360px] overflow-y-auto overflow-x-hidden scrollbar-hidden" ref={notesListRef}>
+            <div className="-mt-12 max-h-[320px] overflow-y-auto overflow-x-hidden scrollbar-hidden" ref={notesListRef}>
               <ul className="pr-4">
                 {notes.map((note) => (
                   <li
                   onClick={() => openModal(note)}
-                  className="py-4 bg-blue-300/50 rounded-xl w-full m-4 px-6 p-3 flex justify-between items-center hover:cursor-pointer" style={{ backgroundColor: 'var(--note-bg)' }}
+                  className="py-4 bg-blue-300/50 rounded-xl w-full m-4 px-6 p-3 flex justify-between items-center hover:cursor-pointer" style={{ backgroundColor: note.important ? 'var(--note-important-bg)' : 'var(--note-bg)' }}
                     key={Number(note.id)}
                     >
                       <div>
@@ -139,7 +145,8 @@ function App() {
                         <p style={{ color: 'var(--text-primary)' }} className="text-gray-700">{truncateContent(note.content, 80)}</p>
                         <small style={{ color: 'var(--text-primary)' }} className="text-gray-700">{new Date(Number(note.timestamp) / 1000000).toLocaleString()}</small>
                       </div>
-                      <div>
+                      <div className="flex flex-col gap-2">
+                        <button className="rounded-xl hover:scale-110 transition duration-500 text-white p-2" onClick={(e) => { e.stopPropagation(); toggleImportant(note.id); }} style={{ backgroundColor: 'var(--button-bg)' }}>{note.important ? 'Unpin' : 'Pin'}</button>
                         <button className="rounded-xl hover:scale-110 transition duration-500 text-white p-2" style={{backgroundColor: 'var(--delete-bg)'}} onClick={
                           (e) => {
                              e.stopPropagation();

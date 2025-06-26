@@ -7,13 +7,14 @@ actor {
         title: Text;
         content: Text;
         timestamp: Int;
+        important: Bool;
     };
 
     stable var notes: [Note] = [];
 
     public func addNote(title: Text, content: Text) : async Nat {
         let id = notes.size();
-        notes := Array.append(notes, [{id; title; content; timestamp = Time.now()}]);
+        notes := Array.append(notes, [{id; title; content; timestamp = Time.now(); important = false;}]);
         id
     };
 
@@ -21,9 +22,9 @@ actor {
         notes
     };
 
-    public func updateNote(id: Nat, title: Text, content: Text) : async Bool {
+    public func updateNote(id: Nat, title: Text, content: Text, important: Bool) : async Bool {
         let updated = Array.map<Note, Note>(notes, func (note) {
-            if (note.id == id) { {id; title; content; timestamp = Time.now()}} else {
+            if (note.id == id) { {id; title; content; timestamp = Time.now(); important;}} else {
                 note
             }
         });
@@ -41,5 +42,16 @@ actor {
             note.id != id
         });
         notes.size() < originalLength
-    }
+    };
+
+    public func toggleImportant(id: Nat) {
+        let updated = Array.map<Note, Note>(notes, func (note) {
+            if (note.id == id) {
+                {id = note.id; title = note.title; content = note.content; timestamp = note.timestamp; important = not note.important}
+            } else {
+                note
+            }
+        });
+        notes := updated;
+    };
 }
