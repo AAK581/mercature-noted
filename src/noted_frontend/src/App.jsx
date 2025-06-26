@@ -13,7 +13,8 @@ function App() {
   const [theme, setTheme] = useState('light');
   const notesListRef = useRef(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null)
+  const dropdownRef = useRef(null);
+  const [noteCount, setNoteCount] = useState(0);
 
   const canisterId = 'uxrrr-q7777-77774-qaaaq-cai';
 
@@ -21,16 +22,17 @@ function App() {
     const fetchNotes = async () => {
       const notes = await noted_backend.getNotes();
       setNotes(notes.sort((a, b) => (b.important ? 1 : 0) - (a.important ? 1 : 0)));
+      setNoteCount(notes.length);
     }
     fetchNotes();
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
 
   useEffect(() => {    
-      if (notesListRef.current && notes.length > 0) {
+      if (notesListRef.current && notes.length > 0 && notes.length > noteCount) {
       notesListRef.current.scrollTop = notesListRef.current.scrollHeight;
     }
-  }, [notes])
+  }, [notes, noteCount])
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -55,6 +57,10 @@ function App() {
     setContent('');
     const notes = await noted_backend.getNotes();
     setNotes(notes.sort((a, b) => (b.important ? 1 : 0) - (a.important ? 1 : 0)));
+    setNoteCount(notes.length);
+    if (notesListRef.current && notes.length > 0 && notes.length > noteCount) {
+      notesListRef.current.scrollTop = notesListRef.current.scrollHeight;
+    }
   }
 
   const toggleImportant = async (id) => {
@@ -101,14 +107,14 @@ function App() {
 
   return (
     <>
-    <div className={notes.length === 0 ? "max-w-xl p-5 pb-16 m-auto my-6 shadow-xl rounded-xl" : 'max-w-6xl p-5 m-auto my-6 shadow-xl rounded-xl'} style={{backgroundColor: 'var(--container-bg)'}}>
+    <div className={notes.length === 0 ? "max-w-xl p-5 pb-16 mx-auto my-6 shadow-xl rounded-xl 2xl:my-10 2xl:mt-40" : 'max-w-6xl p-5 mx-auto my-6 shadow-xl rounded-xl 2xl:my-10 2xl:mt-40'} style={{backgroundColor: 'var(--container-bg)'}}>
           <div className="flex justify-center items-center m-auto mb-8 ml-8 gap-2">
             <h3 className='text-5xl' style={{color: 'var(--text-primary)'}}>
               Noted!
             </h3>
             <img src="../kowNoted.png" alt="Noted logo" className='w-20'/>
           </div>
-          <div className={ notes.length === 0 ? 'absolute top-10 left-12' : "absolute top-10 left-15"} ref={dropdownRef}>
+          <div className={ notes.length === 0 ? 'absolute top-10 left-12 2xl:top-30' : "absolute top-10 left-15 2xl:top-48 2xl:left-100"} ref={dropdownRef}>
             <button className="rounded-xl p-2 bg-gray-100 text-gray-700 hover:bg-gray-200 transition duration-300" style={{color: 'var(--text-primary)', backgroundColor: 'var(--input-bg'}} onClick={toggleDropdown}>
               {theme.charAt(0).toUpperCase() + theme.slice(1)}
             </button>
@@ -141,7 +147,7 @@ function App() {
                     key={Number(note.id)}
                     >
                       <div>
-                        <strong style={{ color: 'var(--text-primary)'}} className="text-gray-800">{note.title}</strong>
+                        <strong style={{ color: 'var(--text-primary)'}} className="text-gray-800">{truncateContent(note.title, 18)}</strong>
                         <p style={{ color: 'var(--text-primary)' }} className="text-gray-700">{truncateContent(note.content, 80)}</p>
                         <small style={{ color: 'var(--text-primary)' }} className="text-gray-700">{new Date(Number(note.timestamp) / 1000000).toLocaleString()}</small>
                       </div>
@@ -174,7 +180,7 @@ function App() {
         </div>
       </div>
     )}
-    <div className="text-[18px] mt-14 flex justify-between mx-20">
+    <div className="text-[18px] mt-14 flex justify-between mx-20 2xl:mt-72">
         <footer style={{ color: 'var(--text-primary)' }}>Made by AAK581</footer>
         <footer className="text-blue-500">
           <a href="https://www.linkedin.com/in/adham-ahmed-3849b324b/" target="_blank" rel="noopener noreferrer">LinkedIn</a> - 

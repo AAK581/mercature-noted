@@ -42,7 +42,7 @@ body, #root {
   --delete-bg: rgba(163, 47, 47, 0.6); /* Red-500/60 */
   --delete-hover: rgba(173, 50, 50, 0.7); /* Red-500/70 */
   --modal-bg: #374151; /* Gray-700 */
-  --note-important-bg: #1e40af;
+  --note-important-bg: #213c96;
 }
 
 [data-theme="ocean"] {
@@ -56,7 +56,7 @@ body, #root {
   --delete-bg: rgba(239, 68, 68, 0.6); /* Red-500/60 */
   --delete-hover: rgba(201, 176, 176, 0.7); /* Red-500/70 */
   --modal-bg: #a5f3fc; /* Cyan-100 */
-  --note-important-bg: #06b6d4;
+  --note-important-bg: #07c4e6;
 }
 
 [data-theme="yellow"] {
