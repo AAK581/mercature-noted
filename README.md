@@ -50,3 +50,6 @@ dfx deploy
 ```
 
 Once the job completes, Noted! will be available at `http://localhost:4943?canisterId={asset_canister_id}`.
+
+### Demo
+https://drive.google.com/file/d/16-X9SD9tdYQAaWH3fjY69iqiffh8-j66/view?usp=sharing
